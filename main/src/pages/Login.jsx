@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 
 
-function Login() {
+function Login({setUserId}) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [data,setData] = useState([])
@@ -26,6 +26,7 @@ const navigate = useNavigate()
       // console.log('proceed')
       data.forEach((ele) => {
         if (ele.email === email && ele.password === password) {
+          setUserId(ele.id)
           navigate('/')
         }
         // else {

@@ -2,13 +2,18 @@ import React, { useState, useEffect } from 'react';
 import shootingSound from './sounnd.mp3';
 import axios from 'axios';
 
-const Game = () => {
+
+
+
+const Game = ({userId}) => {
   const [fruits, setFruits] = useState([]);
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasGameEnded, setHasGameEnded] = useState(false);
   const [userPoints, setUserPoints] = useState(0);
+
+
 
   const getRandomFruit = () => {
     const fruits = ['🍎', '🍌', '🍇', '🍊', '🍉', '🍓'];
@@ -50,7 +55,7 @@ const Game = () => {
 
   const getUserPoints = async () => {
     try {
-      const response = await axios.get(`https://gaming-8lj4.onrender.com/user/1`);
+      const response = await axios.get(`https://gaming-8lj4.onrender.com/user/${userId}`);
       setUserPoints(response.data.points);
     } catch (error) {
       // console.error(error);
@@ -60,7 +65,7 @@ const Game = () => {
   const pointadded = async () => {
     try {
       const updatedPoints = parseInt(userPoints) + parseInt(score);
-      const response = await axios.patch(`https://gaming-8lj4.onrender.com/user/1`, {
+      const response = await axios.patch(`https://gaming-8lj4.onrender.com/user/${userId}`, {
         points: updatedPoints,
       });
       setUserPoints(response.data.points);

@@ -8,17 +8,17 @@ import PageNotFound from './PageNotFOund';
 import WordGuess from './WordGuess';
 import Login from './Login';
 function Mainroutes() {
-  // const [userId, setUserId] = useState(0)
+  const [userId, setUserId] = useState(0)
 
   return (
     <>
     <Routes>
         <Route path='/' element={<Home/>}></Route>
-        <Route path='/wordguess' element={<WordGuess />}></Route>      
-        <Route path='/shoot' element={<Game />}></Route> 
-        <Route path='/snake' element={<Snake />}></Route>
+        <Route path='/wordguess' element={<WordGuess userId={userId} />}></Route>      
+        <Route path='/shoot' element={<Game userId={userId} />}></Route> 
+        <Route path='/snake' element={<Snake userId={userId} />}></Route>
         <Route path='/register' element={<Register />}></Route>
-        <Route path='/login' element={<Login />}></Route>     
+        <Route path='/login' element={<Login setUserId={ setUserId} />}></Route>     
         <Route path='*' element={<PageNotFound/>}></Route>     
     </Routes>
     </>

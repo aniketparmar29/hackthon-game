@@ -5,12 +5,14 @@ type WordProps = {
   guessedLetters: string[]
   wordToGuess: string
   reveal?: boolean
+  userId:number
 }
 
 export function WordGuessWord({
   guessedLetters,
   wordToGuess,
   reveal = false,
+  userId
 }: WordProps) {
   const isWordGuessed = wordToGuess.split("").every((letter) =>
   guessedLetters.includes(letter)
@@ -21,7 +23,7 @@ export function WordGuessWord({
   const points = isWordGuessed ? 50 : 0;
   const getUserPoints = async () => {
     try {
-      const response = await axios.get(`https://gaming-8lj4.onrender.com/user/1`);
+      const response = await axios.get(`https://gaming-8lj4.onrender.com/user/${userId}`);
       setUserPoints(response.data.points);
     } catch (error) {
       // console.error(error);
@@ -31,7 +33,7 @@ export function WordGuessWord({
   const pointadded = async () => {
     try {
       const updatedPoints = parseInt(userPoints.toString()) + 50;
-const response = await axios.patch(`https://gaming-8lj4.onrender.com/user/1`, {
+const response = await axios.patch(`https://gaming-8lj4.onrender.com/user/${userId}`, {
   points: updatedPoints.toString(),
 });
 setUserPoints(response.data.points);

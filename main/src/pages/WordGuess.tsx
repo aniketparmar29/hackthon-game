@@ -7,9 +7,11 @@ function getWord() {
     return words[Math.floor(Math.random() * words.length)]
 }
 
+type  props = {
+    userId:number
+}
 
-
-const WordGuess = () => {
+const WordGuess = ({userId}:props) => {
     const [wordToGuess, setWordToGuess] = useState(getWord);
     const [guessedLetters, setGuessedLetters] = useState<string[]>([])
     console.log(wordToGuess)
@@ -120,7 +122,7 @@ const WordGuess = () => {
                 isLoser || isWinner ? <button onClick={PlayAgain}>Play Again</button> : null
             } */}
 
-            <WordGuessWord reveal={isLoser} wordToGuess={wordToGuess} guessedLetters={guessedLetters} />
+            <WordGuessWord reveal={isLoser} wordToGuess={wordToGuess} userId={userId} guessedLetters={guessedLetters} />
 
             <div style={{ alignSelf: "stretch" }}>
                 <WordGuessKeyboard disabled={isWinner || isLoser}

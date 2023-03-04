@@ -13,7 +13,12 @@ const Scale =50;
 const timeDelay = 100;
 
 
-function Snake() {
+type props = {
+  userId: number
+}
+
+
+function Snake({userId}:props) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [snake,setSnake] = useState(initialSnake); 
   const [apple,setApple] = useState(initialApple); 
@@ -76,7 +81,7 @@ function Snake() {
   
   const getUserPoints = async () => {
     try {
-      const response = await axios.get(`https://gaming-8lj4.onrender.com/user/1`);
+      const response = await axios.get(`https://gaming-8lj4.onrender.com/user/${userId}`);
       setUserPoints(response.data.points);
     } catch (error) {
       // console.error(error);
@@ -86,7 +91,7 @@ function Snake() {
   const pointadded = async () => {
     try {
       const updatedPoints = parseInt(userPoints.toString()) + parseInt(score.toString());
-const response = await axios.patch(`https://gaming-8lj4.onrender.com/user/1`, {
+const response = await axios.patch(`https://gaming-8lj4.onrender.com/user/${userId}`, {
   points: updatedPoints.toString(),
 });
 setUserPoints(response.data.points);
