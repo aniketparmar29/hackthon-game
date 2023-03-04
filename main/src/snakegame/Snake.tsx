@@ -3,7 +3,7 @@ import './snakegame.css';
 import AppleLogo from './applePixels.png'
 import Monitor from './oldMonitor.png'
 import useInterval from './useInterverl';
-
+import axios from 'axios'
 
 const canvasX = 1000;
 const canvasY = 1000;
@@ -21,6 +21,9 @@ function Snake() {
   const [delay,setDelay] = useState<number | null>(null)
   const [gameover,SetGameover] = useState(false)
   const [score,setScore] = useState(0);
+  const [userPoints, setUserPoints] = useState(0);
+
+
 
 
   useInterval(()=> runGame(),delay)
@@ -40,11 +43,6 @@ function Snake() {
     }
   },[snake,apple,gameover])
  
-  function handleSetScore(){
-    if(score>Number(localStorage.getItem("snakeScore"))){
-      localStorage.setItem("snakeScore",JSON.stringify(score))
-    }
-  }
 
   function Play(){
     setSnake(initialSnake)
@@ -75,6 +73,29 @@ function Snake() {
     }
     return false;
   }
+  
+  const getUserPoints = async () => {
+    try {
+      const response = await axios.get(`https://gaming-8lj4.onrender.com/user/1`);
+      setUserPoints(response.data.points);
+    } catch (error) {
+      // console.error(error);
+    }
+  };
+  getUserPoints();
+  const pointadded = async () => {
+    try {
+      const updatedPoints = parseInt(userPoints.toString()) + parseInt(score.toString());
+const response = await axios.patch(`https://gaming-8lj4.onrender.com/user/1`, {
+  points: updatedPoints.toString(),
+});
+setUserPoints(response.data.points);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
 
   const runGame = () =>{
     const newSnake = [...snake];
@@ -82,8 +103,8 @@ function Snake() {
     newSnake.unshift(newSnakeHead);
     if(checkCollision(newSnakeHead)){
       setDelay(null)
+      pointadded();
       SetGameover(true);
-      handleSetScore()
     }
     if(!appleAte(newSnake)){
       newSnake.pop()
@@ -117,7 +138,6 @@ function Snake() {
      <button onClick={Play} className="playButton">Play</button>
      <div className="scoreBox">
       <h2>Score: {score}</h2>
-      <h2>High Score: {localStorage.getItem('snackScore')}</h2>
      </div>
     </div>
   );

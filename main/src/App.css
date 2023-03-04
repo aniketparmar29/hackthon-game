@@ -1,0 +1,32 @@
+#addd {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    background-color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+@media (max-width: 640px) {
+    .text-4xl {
+      font-size: 2rem;
+    }
+    .mb-4 {
+      margin-bottom: 1rem;
+    }
+    .px-8 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    .py-4 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    .rounded-lg {
+      border-radius: 0.5rem;
+    }
+    .text-white {
+      color: #fff;
+    }
+  }
