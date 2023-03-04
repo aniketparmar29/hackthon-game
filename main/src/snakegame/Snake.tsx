@@ -19,6 +19,7 @@ type props = {
 
 
 function Snake({userId}:props) {
+  console.log(userId)
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [snake,setSnake] = useState(initialSnake); 
   const [apple,setApple] = useState(initialApple); 

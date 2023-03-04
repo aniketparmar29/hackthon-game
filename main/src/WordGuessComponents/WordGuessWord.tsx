@@ -14,6 +14,8 @@ export function WordGuessWord({
   reveal = false,
   userId
 }: WordProps) {
+
+  console.log(userId)
   const isWordGuessed = wordToGuess.split("").every((letter) =>
   guessedLetters.includes(letter)
   ); // check if all letters in the word have been guessed
