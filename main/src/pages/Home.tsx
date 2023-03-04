@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../Components/Navbar'
 import GameCard from './GameCard';
+import Leaderboard from '../Components/LeaderBoard';
 function Home() {
   const games = [
     {
@@ -36,6 +37,7 @@ function Home() {
         />
         ))}
         </div>
+        <Leaderboard apiUrl="https://gaming-8lj4.onrender.com/user" />
     </div>
   )
 }
