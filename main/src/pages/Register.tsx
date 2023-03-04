@@ -6,7 +6,7 @@ const Register = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [payment, setPayment] = useState('')
-    const [points, setPoints] = useState('')
+    const [points, setPoints] = useState('0')
 
 
     const navigate = useNavigate();

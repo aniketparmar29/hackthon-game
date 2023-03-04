@@ -1,9 +1,54 @@
-import React,{useState} from 'react'
-import { Link } from 'react-router-dom'
+import React,{useState,useEffect} from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+
+
 
 function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [data,setData] = useState([])
+
+  useEffect(() => {
+    fetch("https://gaming-8lj4.onrender.com/user").then(r => {
+      return r.json()
+    }).then(res => {
+      setData(res)
+    }).catch(err => console.log(err))   
+    
+  }, [])
+  console.log(data)
+
+const navigate = useNavigate()
+
+  const handleLogin = (e) => {
+    e.preventDefault()
+    if (validate()) {
+      // console.log('proceed')
+      data.forEach((ele) => {
+        if (ele.email === email && ele.password === password) {
+          navigate('/')
+        }
+        // else {
+        //   alert('Enter Correct Credentials')
+        // }
+      })      
+    }
+
+  }
+
+  const validate = () => {
+    let result = true;
+    if (email === '' || email === null) {
+      result = false;
+      alert('Please Enter Email')
+    }
+    if (password === '' || password === null) {
+      result = false;
+      alert('Please Enter password')
+    }
+    
+    return result
+  }
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -16,14 +61,14 @@ function Login() {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Sign in to your account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
+              <form className="space-y-4 md:space-y-6" action="#" onSubmit={handleLogin}>
                 <div>
                   <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                  <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" />
+                  <input value={email} onChange={e=>setEmail(e.target.value)} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" />
                 </div>
                 <div>
                   <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                  <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                  <input value={password} onChange={e => setPassword(e.target.value)} type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-start">

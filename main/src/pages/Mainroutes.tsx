@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {Routes,Route} from 'react-router-dom';
 import Game from '../aniket/Game';
 import Register from './Register';
@@ -8,6 +8,8 @@ import PageNotFound from './PageNotFOund';
 import WordGuess from './WordGuess';
 import Login from './Login';
 function Mainroutes() {
+  // const [userId, setUserId] = useState(0)
+
   return (
     <>
     <Routes>
