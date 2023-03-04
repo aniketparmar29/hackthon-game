@@ -9,7 +9,7 @@ type GameCardProps = {
 };
 const GameCard: React.FC<GameCardProps> = ({ img, name, link, pointsToEarn }) => {
   return (
-    <div className="border-2 p-5 w-[90%] shadow-blue-600 shadow-lg">
+    <div className="border-2 p-5 w-[90%] shadow-blue-600 shadow-lg m-auto ">
         <Link
           to={link}
           className="block bg-white shadow rounded-lg overflow-hidden hover:shadow-lg transition-all duration-200 sm:flex sm:flex-col"
