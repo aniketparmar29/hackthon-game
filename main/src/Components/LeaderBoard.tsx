@@ -35,7 +35,7 @@ const Leaderboard: React.FC<Props> = ({ apiUrl }) => {
         </thead>
         <tbody>
           {users
-            .sort((a, b) => a.points - b.points)
+            .sort((a, b) => b.points - a.points)
             .map((user, index) => (
               <tr key={user.id}>
                 <td className="border px-4 py-2">{index + 1}</td>
