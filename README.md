@@ -32,8 +32,8 @@ ___
 
 | Team members | Functionality |
 | ------ | ------ |
-| Aniket Parmar | Games | Cards | LeaderBoard |
-| Mohit Kumar | Games | Login | Navbar|
+| Aniket Parmar |Games,Cards,LeaderBoard|
+| Mohit Kumar |Games,Login,Navbar|
 
 
 
